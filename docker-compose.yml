@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  torrent-button-plugin:
+    build: .
+    ports:
+      - "9118:80"
+    restart: unless-stopped
+    container_name: torrent-button-server 
