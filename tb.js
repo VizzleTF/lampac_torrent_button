@@ -1,9 +1,20 @@
 /**
  * TorrentButton Plugin v2.5.0
+ * @name TorrentButton
+ * @author VizzleTF
+ * @description Adds a separate torrent button to card interface
+ * @version 2.5.0
  */
 
 (function () {
     'use strict';
+
+    var plugin = {
+        name: 'TorrentButton',
+        author: 'VizzleTF',
+        version: '2.5.0',
+        description: 'Adds a separate torrent button to card interface'
+    };
 
     function startPlugin() {
         function moveExistingTorrentButton(e) {
@@ -58,6 +69,17 @@
                 }, 200);
             }
         } catch (e) { }
+    }
+
+    // Регистрация плагина в Lampa
+    if (typeof Lampa !== 'undefined' && Lampa.Plugin) {
+        Lampa.Plugin.add({
+            plugin_name: plugin.name,
+            name: plugin.name,
+            author: plugin.author,
+            version: plugin.version,
+            description: plugin.description
+        });
     }
 
     if (!window.torrent_button_plugin) {

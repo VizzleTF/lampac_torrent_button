@@ -1,32 +1,30 @@
-# TorrentButton Plugin - Docker
+# TorrentButton Plugin
 
-A plugin for Lampa that improves the display of torrent buttons in movie and TV show card interfaces.
+A plugin for Lampa that adds a separate torrent button to card interface.
 
 ## Description
 
-TorrentButton Plugin automatically moves the torrent button to a more convenient location on content cards in Lampa. The plugin works with both new and classic Lampa interfaces, providing a better user experience when accessing torrent links.
+TorrentButton Plugin automatically adds a separate torrent button to content cards in Lampa. The plugin works with both new and classic Lampa interfaces, providing easy access to torrent links directly from the card interface.
 
-## Quick Start
+## Installation Options
 
-```bash
-docker-compose up -d
-```
+### Option 1: Lampac Server (Root directory)
+1. Copy `tb.js` to `/home/wwwroot` directory on your Lampac server
+2. Plugin will be available at: `http://your-lampac-ip:port/tb.js`
 
-## Alternative Installation (Lampac Server)
+### Option 2: Lampac Server (Plugins subdirectory)
+1. Copy `tb.js` to `/home/wwwroot/plugins/` directory on your Lampac server
+2. Plugin will be available at: `http://your-lampac-ip:port/plugins/tb.js`
 
-You can also place the plugin directly on your Lampac server:
+### Option 3: Docker Container
+1. Clone repository: `git clone https://github.com/VizzleTF/lampac_torrent_button.git`
+2. Navigate to directory: `cd lampac_torrent_button`
+3. Run: `docker-compose up -d`
+4. Plugin will be available at: `http://your-docker-server-ip:9118/tb.js`
 
-1. Copy `torrent_button.js` to `wwwroot` directory on your Lampac server
-2. Plugin will be available at: `http://your-lampac-ip:port/torrent_button.js`
-3. Use this URL in Lampa plugin settings
-
-## Plugin Access
-
-- **Plugin URL**: `http://your-ip:9118/torrent_button.js`
-
-## Lampa Installation
+## Lampa Setup
 
 1. Open **Lampa** 
 2. **Settings** → **Extensions** → **Add Plugin**
-3. Enter URL: `http://your-ip:9118/torrent_button.js`
+3. Enter one of the URLs above depending on your installation method
 4. Click **Done**
