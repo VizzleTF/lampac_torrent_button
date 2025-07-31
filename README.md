@@ -8,15 +8,19 @@ TorrentButton Plugin automatically adds a separate torrent button to content car
 
 ## Installation Options
 
-### Option 1: Lampac Server (Root directory)
+### Option 1: Vercel (Recommended)
+1. Plugin is available at: `https://lampac-torrent-button.vercel.app/tb.js`
+2. No installation required - just use the URL directly
+
+### Option 2: Lampac Server (Root directory)
 1. Copy `tb.js` to `/home/wwwroot` directory on your Lampac server
 2. Plugin will be available at: `http://your-lampac-ip:port/tb.js`
 
-### Option 2: Lampac Server (Plugins subdirectory)
+### Option 3: Lampac Server (Plugins subdirectory)
 1. Copy `tb.js` to `/home/wwwroot/plugins/` directory on your Lampac server
 2. Plugin will be available at: `http://your-lampac-ip:port/plugins/tb.js`
 
-### Option 3: Docker Container
+### Option 4: Docker Container
 1. Clone repository: `git clone https://github.com/VizzleTF/lampac_torrent_button.git`
 2. Navigate to directory: `cd lampac_torrent_button`
 3. Run: `docker-compose up -d`
