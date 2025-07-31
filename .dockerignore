@@ -5,4 +5,5 @@ Dockerfile
 docker-compose.yml
 .dockerignore
 .DS_Store
-*.log 
+*.log
+public/ 

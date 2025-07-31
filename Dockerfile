@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-COPY tb.js /usr/share/nginx/html/
+COPY public/tb.js /usr/share/nginx/html/
 
 EXPOSE 80
 
