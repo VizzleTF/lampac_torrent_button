@@ -1,9 +1,9 @@
 /**
- * TorrentButton Plugin v2.5.0
+ * TorrentButton Plugin v0.2.5
  * @name TorrentButton
  * @author VizzleTF
  * @description Adds a separate torrent button to card interface
- * @version 2.5.0
+ * @version 0.2.5
  */
 
 (function () {
@@ -12,7 +12,7 @@
     var plugin = {
         name: 'TorrentButton',
         author: 'VizzleTF',
-        version: '2.5.0',
+        version: '0.2.5',
         description: 'Adds a separate torrent button to card interface'
     };
 
