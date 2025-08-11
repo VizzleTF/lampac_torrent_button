@@ -9,6 +9,20 @@
 (function () {
     'use strict';
 
+    // Dev-флаг для отладки (включить через window.LAMPA_TB_DEBUG = true)
+    var DEBUG = (typeof window !== 'undefined' && !!window.LAMPA_TB_DEBUG);
+    function debugLog() {
+        if (DEBUG && typeof console !== 'undefined' && typeof console.debug === 'function') {
+            try { console.debug.apply(console, arguments); } catch (_) { }
+        }
+    }
+
+    // Селекторы вынесены в константы для удобства поддержки
+    var SELECTORS = {
+        newUIButton: '.button--play',
+        oldUITorrentButton: '.view--torrent'
+    };
+
     var plugin = {
         name: 'TorrentButton',
         author: 'VizzleTF',
@@ -17,8 +31,22 @@
     };
 
     function startPlugin() {
+        // Ранние гварды окружения
+        if (typeof Lampa === 'undefined' || !Lampa.Listener) {
+            debugLog('TorrentButton: Lampa not ready');
+            return;
+        }
+        if (typeof $ === 'undefined') {
+            debugLog('TorrentButton: jQuery ($) not available');
+            return;
+        }
+
         function moveExistingTorrentButton(e) {
-            var existingTorrentButton = $(document).find('.view--torrent').not('.moved-to-card');
+            // Сужаем поиск к контексту активности, fallback на document
+            var searchRoot = (e && e.context && e.context.length) ? e.context : $(document);
+            var existingTorrentButton = searchRoot
+                .find(SELECTORS.oldUITorrentButton)
+                .not('.moved-to-card');
 
             if (existingTorrentButton.length > 0) {
                 var torrentButton = existingTorrentButton.first().detach();
@@ -33,19 +61,22 @@
         Lampa.Listener.follow('full', function (e) {
             if (e.type == 'complite') {
                 setTimeout(function () {
+                    var activityRoot = e && e.object && e.object.activity && e.object.activity.render ? e.object.activity.render() : $(document);
                     if (Lampa.Storage.get('card_interfice_type') === 'new') {
-                        var targetElement = e.object.activity.render().find('.button--play');
+                        var targetElement = activityRoot.find(SELECTORS.newUIButton);
                         if (targetElement.length > 0) {
                             moveExistingTorrentButton({
+                                context: activityRoot,
                                 render: targetElement,
                                 movie: e.data.movie
                             });
                         }
                     } else {
-                        var targetElement = e.object.activity.render().find('.view--torrent');
+                        var targetElement = activityRoot.find(SELECTORS.oldUITorrentButton);
                         if (targetElement.length > 0) {
                             if (!targetElement.hasClass('moved-to-card')) {
                                 moveExistingTorrentButton({
+                                    context: activityRoot,
                                     render: targetElement,
                                     movie: e.data.movie
                                 });
@@ -59,16 +90,20 @@
         try {
             if (Lampa.Activity.active().component == 'full') {
                 setTimeout(function () {
-                    var targetElement = Lampa.Activity.active().activity.render().find('.view--torrent');
+                    var activityRootNow = Lampa.Activity.active().activity.render();
+                    var targetElement = activityRootNow.find(SELECTORS.oldUITorrentButton);
                     if (targetElement.length > 0 && !targetElement.hasClass('moved-to-card')) {
                         moveExistingTorrentButton({
+                            context: activityRootNow,
                             render: targetElement,
                             movie: Lampa.Activity.active().card
                         });
                     }
                 }, 200);
             }
-        } catch (e) { }
+        } catch (err) {
+            debugLog('TorrentButton: init error', err);
+        }
     }
 
     // Регистрация плагина в Lampa
