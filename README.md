@@ -9,7 +9,7 @@ TorrentButton Plugin automatically adds a separate torrent button to content car
 ## Installation Options
 
 ### Option 1: Vercel (Recommended)
-1. Plugin is available at: `https://lampac-torrent-button.vercel.app/tb.js`
+1. Plugin is available at: `https://lampac-torrent-button.vercel.app/tb.js` or short: `https://torrb.vercel.app`
 2. No installation required - just use the URL directly
 
 ### Option 2: Lampac Server (Root directory)
